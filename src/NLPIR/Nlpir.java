@@ -3,34 +3,36 @@ package NLPIR;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 
+import java.io.UnsupportedEncodingException;
+
 
 public class Nlpir {
 	public static final int GBK = 0;
 	public static final int UTF8 = 1;
-	public Nlpir(int charset_type) {
-		/*
-#define GBK_CODE 0//Ĭ��֧��GBK����
-#define UTF8_CODE GBK_CODE+1//UTF8����
-#define BIG5_CODE GBK_CODE+2//BIG5����
-#define GBK_FANTI_CODE GBK_CODE+3//GBK���룬�������������
-#define UTF8_FANTI_CODE GBK_CODE+4//UTF8����
+	public Nlpir(int charset_type) throws UnsupportedEncodingException {
+/*
+#define GBK_CODE 0//??????GBK????
+#define UTF8_CODE GBK_CODE+1//UTF8????
+#define BIG5_CODE GBK_CODE+2//BIG5????
+#define GBK_FANTI_CODE GBK_CODE+3//GBK?????????????????
+#define UTF8_FANTI_CODE GBK_CODE+4//UTF8????
 */
-		String argu = "";
+		String argu = "z:/program/java/dataMining";
 		int init_flag = CLibrary.Segmentation.NLPIR_Init(
 				argu, charset_type, "0");
 		if (0 == init_flag) {
 			System.err.println("Nlpir init succeed");
 			return;
 		} else
-			System.out.println("Nlpir init fail");
+			System.err.println("Nlpir init fail");
 	}
 	public void AddNewWord(String sSourceFilename) {
 		System.out.println(sSourceFilename);
-		CLibrary.Segmentation.NLPIR_NWI_Start();//�����´ʷ��ֹ���
-		int b1 = CLibrary.Segmentation.NLPIR_NWI_AddFile(sSourceFilename); //����´�ѵ�����ļ����ɷ������
+		CLibrary.Segmentation.NLPIR_NWI_Start();//?????????????
+		int b1 = CLibrary.Segmentation.NLPIR_NWI_AddFile(sSourceFilename); //????????????????????????
 		System.out.println(b1);
-		CLibrary.Segmentation.NLPIR_NWI_Complete();//����ļ�����ѵ�����ݽ���
-		int count = CLibrary.Segmentation.NLPIR_NWI_Result2UserDict();//�´�ʶ�������뵽�û��ʵ�
+		CLibrary.Segmentation.NLPIR_NWI_Complete();//????????????????????
+		int count = CLibrary.Segmentation.NLPIR_NWI_Result2UserDict();//??????????????????
 		String result = CLibrary.Segmentation.NLPIR_NWI_GetResult(false);
 		System.out.println(count + ": " + result);
 	}
@@ -59,18 +61,23 @@ public class Nlpir {
 		int NLPIR_AddUserWord(String sWord);
 		int NLPIR_SaveTheUsrDic();
 
-		boolean NLPIR_NWI_Start();//�����´ʷ��ֹ���
+		boolean NLPIR_NWI_Start();//?????????????
 
-		int NLPIR_NWI_AddFile(String sInputFile); //����´�ѵ�����ļ����ɷ������
+		int NLPIR_NWI_AddFile(String sInputFile); //????????????????????????
 
-		boolean NLPIR_NWI_Complete();//����ļ�����ѵ�����ݽ���
+		boolean NLPIR_NWI_Complete();//????????????????????
 
-		int NLPIR_NWI_Result2UserDict();//�´�ʶ�������뵽�û��ʵ�
-		String NLPIR_NWI_GetResult(boolean bWeightOut);//����´�ʶ����
+		int NLPIR_NWI_Result2UserDict();//??????????????????
+		String NLPIR_NWI_GetResult(boolean bWeightOut);//???????????
 
 		String NLPIR_GetKeyWords(String sLine, int nMaxKeyLimit,
 								 boolean bWeightOut);
 
 		void NLPIR_Exit();
+	}
+	public static void main(String... args) throws UnsupportedEncodingException {
+		String currentPath = System.getProperty("user.dir");
+		System.out.println(currentPath);
+		new Nlpir(1);
 	}
 }
