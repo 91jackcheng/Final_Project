@@ -1,21 +1,12 @@
 package NGram;
+
+import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.ngram.NGramTokenizer;
+import org.apache.lucene.analysis.tokenattributes.*;
+import org.apache.lucene.util.Version;
+
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Iterator;
-import org.apache.lucene.analysis.Tokenizer;
-import org.apache.lucene.analysis.ngram.EdgeNGramTokenFilter;
-import org.apache.lucene.analysis.ngram.EdgeNGramTokenizer;
-import org.apache.lucene.analysis.ngram.Lucene43EdgeNGramTokenizer;
-import org.apache.lucene.analysis.ngram.Lucene43NGramTokenizer;
-import org.apache.lucene.analysis.ngram.NGramTokenizer;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
-import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
-import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
-import org.apache.lucene.analysis.tokenattributes.PositionLengthAttribute;
-import org.apache.lucene.analysis.tokenattributes.TermToBytesRefAttribute;
-import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
-import org.apache.lucene.util.Attribute;
-import org.apache.lucene.util.Version;
 /**
  * lucene 4.x 使用N-Gram模型和Edge-NGram模型分词器实例。
  * @author yunshouhu

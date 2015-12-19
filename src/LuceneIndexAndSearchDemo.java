@@ -1,10 +1,7 @@
-import org.ansj.domain.Term;
 import org.ansj.lucene4.AnsjAnalysis;
-import org.ansj.splitWord.analysis.IndexAnalysis;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.document.Document;
@@ -26,7 +23,6 @@ import org.apache.lucene.util.Version;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.List;
 
 
 /**
