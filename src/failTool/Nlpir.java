@@ -1,4 +1,4 @@
-package NLPIR;
+package failTool;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;
@@ -48,7 +48,7 @@ public class Nlpir {
 
 	interface CLibrary extends Library {
 		CLibrary Segmentation = (CLibrary) Native.loadLibrary(
-				"NLPIR", CLibrary.class);
+				"failTool/NLPIR", CLibrary.class);
 
 		int NLPIR_Init(String sDataPath, int encoding, String sLicenceCode);
 

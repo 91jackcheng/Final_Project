@@ -99,15 +99,28 @@ public class QA {
 		for (String newnr: nr)
 			UserDefineLibrary.insertWord(newnr, "nr", 1000);
 	}
+	static void singleTest() {
+		Scanner input = new Scanner(System.in);
+		String question;
+		while ((question = input.nextLine()) != null) {
+			String[] sp = question.split(" ");
+			question = sp[0];
+			String ansType = "";
+			if (sp.length > 1) ansType = sp[1];
+			questionSolver answer = questionSolver.getAnswerMachine(questionSolver.questionTypes.ANSWER, 0, question, ansType);
+			answer.run();
+			System.err.println(answer.answerType + " : " + answer.question + " : " + answer.answer);
+			System.err.println(answer.info.toString());
+		}
+	}
 	public static void main(String... args) throws IOException {
 		addNewWord();
-		System.out.println("please enter the question file name");
-		Scanner input = new Scanner(System.in);
+		//singleTest();
 		String inputFile, typeFile;// = input.nextLine();
 		//System.setProperty("user.dir", "./QA");
 		inputFile = "./QA/answer.sample.txt";
 		typeFile = "./QA/answer.sample.typeout.txt";
-		QA.testOnSample(inputFile, typeFile, questionSolver.questionTypes.ANSWER);
+		//QA.testOnSample(inputFile, typeFile, questionSolver.questionTypes.ANSWER);
 		inputFile = "./QA/judge.sample.txt";
 		//QA.testOnSample(inputFile, typeFile, questionSolver.questionTypes.JUDGE);
 
@@ -115,7 +128,7 @@ public class QA {
 		typeFile = "./QA/answer.typeout.txt";
 		//new QA(inputFile, typeFile, questionSolver.questionTypes.ANSWER);
 		//new QA(inputFile, typeFile, questionSolver.questionTypes.ZHIDAO);
-		//new QA("./QA/next.txt", typeFile, questionSolver.questionTypes.ANSWER);
+		new QA("./QA/next.txt", typeFile, questionSolver.questionTypes.ANSWER);
 		inputFile = "./QA/judge.txt";
 		//new QA(inputFile, typeFile, questionSolver.questionTypes.JUDGE);
 

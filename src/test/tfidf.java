@@ -1,3 +1,5 @@
+package test;
+
 import org.ansj.lucene4.AnsjAnalysis;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
