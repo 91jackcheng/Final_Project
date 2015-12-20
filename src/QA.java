@@ -29,8 +29,7 @@ public class QA {
 					while (!answerMachines.get(0).isAlive()) {
 						questionSolver answer = answerMachines.remove();
 						resultOutput.write(String.format("%d\t%s\n", answer.questionID, answer.answer));
-						log.info(answer.answerType + " : " + answer.question + " : " + answer.answer);
-						log.info(answer.info.toString());
+						log.info(answer.questionID + "," + answer.answerType + "," + answer.question + "," + answer.answer + "," + answer.info.toString());
 						resultOutput.flush();
 						if (answerMachines.isEmpty()) break;
 					}
@@ -39,6 +38,13 @@ public class QA {
 				answerMachine.start();
 				questionID++;
 			}
+			while (answerMachines.size() > 0)
+				while (!answerMachines.get(0).isAlive()) {
+						questionSolver answer = answerMachines.remove();
+						resultOutput.write(String.format("%d\t%s\n", answer.questionID, answer.answer));
+						log.info(answer.questionID + "," + answer.answerType + "," + answer.question + "," + answer.answer + "," + answer.info.toString());
+						resultOutput.flush();
+					}
 		} catch (IOException e) {
 			e.printStackTrace();
 			log.warning("read question" + questionID + " read fail");
@@ -115,7 +121,7 @@ public class QA {
 	}
 	public static void main(String... args) throws IOException {
 		addNewWord();
-		//singleTest();
+		singleTest();
 		String inputFile, typeFile;// = input.nextLine();
 		//System.setProperty("user.dir", "./QA");
 		inputFile = "./QA/answer.sample.txt";
@@ -126,9 +132,8 @@ public class QA {
 
 		inputFile = "./QA/answer.txt";
 		typeFile = "./QA/answer.typeout.txt";
-		//new QA(inputFile, typeFile, questionSolver.questionTypes.ANSWER);
-		//new QA(inputFile, typeFile, questionSolver.questionTypes.ZHIDAO);
-		new QA("./QA/next.txt", typeFile, questionSolver.questionTypes.ANSWER);
+		new QA(inputFile, typeFile, questionSolver.questionTypes.ANSWER);
+		//new QA("./QA/next.txt", typeFile, questionSolver.questionTypes.ANSWER);
 		inputFile = "./QA/judge.txt";
 		//new QA(inputFile, typeFile, questionSolver.questionTypes.JUDGE);
 
